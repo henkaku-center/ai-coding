@@ -58,7 +58,7 @@ export class ArticleProposer {
 
     // 最小スコアフィルタ
     if (options?.minScore !== undefined) {
-      filtered = filtered.filter((trend) => trend.score >= options.minScore);
+      filtered = filtered.filter((trend) => trend.score >= options.minScore!);
     }
 
     return filtered;

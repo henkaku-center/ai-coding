@@ -51,7 +51,7 @@ export class TrendScoreAnalyzer {
   /**
    * 増加率をスコア化（0-100）
    */
-  private calculateVelocityScore(trend: Trend, history: TrendHistory): number {
+  private calculateVelocityScore(_trend: Trend, history: TrendHistory): number {
     if (history.dataPoints.length < 2) {
       return 50; // データが不足している場合は中央値
     }

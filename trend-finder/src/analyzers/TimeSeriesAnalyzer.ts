@@ -44,7 +44,7 @@ export class TimeSeriesAnalyzer {
 
     const peakPoint = history.dataPoints.reduce((max, point) => {
       return point.score > max.score ? point : max;
-    }, history.dataPoints[0]);
+    });
 
     return peakPoint?.timestamp;
   }

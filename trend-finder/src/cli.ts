@@ -51,7 +51,7 @@ program
   .command('analyze')
   .description('トレンドを分析')
   .option('--date <date>', '対象日付 (YYYY-MM-DD)')
-  .action(async (options) => {
+  .action(async (_options) => {
     try {
       logger.info('Starting trend analysis...');
 

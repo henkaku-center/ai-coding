@@ -6,12 +6,12 @@
  * 現在はモックデータを返す実装になっています
  */
 
-import axios from 'axios';
+// import axios from 'axios'; // 将来のAPI実装時に使用
 import { v4 as uuidv4 } from 'uuid';
 import { BaseCollector } from './base/BaseCollector.js';
 import { Trend } from '../models/Trend.js';
 import { config } from '../config/index.js';
-import { TWITTER_API_ENDPOINT } from '../config/sources.js';
+// import { TWITTER_API_ENDPOINT } from '../config/sources.js'; // 将来のAPI実装時に使用
 
 export class TwitterCollector extends BaseCollector<Trend> {
   protected sourceName = 'Twitter/X';

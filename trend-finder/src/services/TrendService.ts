@@ -3,25 +3,26 @@
  * トレンド収集・分析・提案の統合サービス
  */
 
-import { MockTrendCollector, TwitterCollector, NewsCollector, CalendarCollector } from '../collectors/index.js';
-import { TrendScoreAnalyzer, TimeSeriesAnalyzer, RelationAnalyzer } from '../analyzers/index.js';
+import { MockTrendCollector, TwitterCollector } from '../collectors/index.js';
+import { TrendScoreAnalyzer } from '../analyzers/index.js';
 import { ArticleProposer } from '../proposers/index.js';
 import { DailyReporter, DailyReportData } from '../reporters/index.js';
 import { TrendRepository, BookRepository } from '../repositories/index.js';
 import { Trend } from '../models/Trend.js';
-import { Book, BookPromotion } from '../models/BookPromotion.js';
 import { BookPromoProposer } from '../proposers/BookPromoProposer.js';
 import { logger } from '../utils/logger.js';
 
 export class TrendService {
   private mockCollector = new MockTrendCollector();
   private twitterCollector = new TwitterCollector();
-  private newsCollector = new NewsCollector();
-  private calendarCollector = new CalendarCollector();
+  // 将来の拡張用
+  // private newsCollector = new NewsCollector();
+  // private calendarCollector = new CalendarCollector();
 
   private scoreAnalyzer = new TrendScoreAnalyzer();
-  private timeSeriesAnalyzer = new TimeSeriesAnalyzer();
-  private relationAnalyzer = new RelationAnalyzer();
+  // 将来の拡張用
+  // private timeSeriesAnalyzer = new TimeSeriesAnalyzer();
+  // private relationAnalyzer = new RelationAnalyzer();
 
   private articleProposer = new ArticleProposer();
   private bookPromoProposer = new BookPromoProposer();

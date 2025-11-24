@@ -94,21 +94,23 @@ export class RelationAnalyzer {
   }
 
   /**
-   * Jaccard係数を計算
+   * Jaccard係数を計算（将来の拡張用にコメントアウト）
    * @param set1 - セット1
    * @param set2 - セット2
    * @returns 0-1の類似度
+   *
+   * TODO: findRelationsメソッドで関連度スコアの計算に使用予定
    */
-  private calculateJaccardCoefficient(set1: Set<string>, set2: Set<string>): number {
-    const intersection = new Set([...set1].filter((x) => set2.has(x)));
-    const union = new Set([...set1, ...set2]);
-
-    if (union.size === 0) {
-      return 0;
-    }
-
-    return intersection.size / union.size;
-  }
+  // private calculateJaccardCoefficient(set1: Set<string>, set2: Set<string>): number {
+  //   const intersection = new Set([...set1].filter((x) => set2.has(x)));
+  //   const union = new Set([...set1, ...set2]);
+  //
+  //   if (union.size === 0) {
+  //     return 0;
+  //   }
+  //
+  //   return intersection.size / union.size;
+  // }
 
   /**
    * 共起キーワードを抽出
