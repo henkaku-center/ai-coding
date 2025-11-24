@@ -3,7 +3,7 @@
  * トレンド収集・分析・提案の統合サービス
  */
 
-import { MockTrendCollector, TwitterCollector, NewsCollector, CalendarCollector } from '../collectors/index.js';
+import { TwitterCollector, NewsCollector, CalendarCollector } from '../collectors/index.js';
 import { TrendScoreAnalyzer } from '../analyzers/index.js';
 import { ArticleProposer } from '../proposers/index.js';
 import { DailyReporter, DailyReportData } from '../reporters/index.js';
@@ -16,7 +16,6 @@ import { logger } from '../utils/logger.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class TrendService {
-  private mockCollector = new MockTrendCollector();
   private twitterCollector = new TwitterCollector();
   private newsCollector = new NewsCollector();
   private calendarCollector = new CalendarCollector();
@@ -41,7 +40,6 @@ export class TrendService {
     logger.info('Starting trend collection from all sources...');
 
     const results = await Promise.allSettled([
-      this.mockCollector.collectWithRetry(),
       this.twitterCollector.collectWithRetry(),
       this.newsCollector.collectWithRetry(),
       this.calendarCollector.collectWithRetry(),
@@ -49,17 +47,8 @@ export class TrendService {
 
     const allTrends: Trend[] = [];
 
-    // モックコレクター（結果0）
-    const mockResult = results[0];
-    if (mockResult.status === 'fulfilled') {
-      allTrends.push(...(mockResult.value as Trend[]));
-      logger.info(`Mock collector succeeded: ${mockResult.value.length} trends`);
-    } else {
-      logger.error('Mock collector failed:', mockResult.reason);
-    }
-
-    // Twitterコレクター（結果1）
-    const twitterResult = results[1];
+    // Twitterコレクター（結果0）
+    const twitterResult = results[0];
     if (twitterResult.status === 'fulfilled') {
       allTrends.push(...(twitterResult.value as Trend[]));
       logger.info(`Twitter collector succeeded: ${twitterResult.value.length} trends`);
@@ -67,8 +56,8 @@ export class TrendService {
       logger.error('Twitter collector failed:', twitterResult.reason);
     }
 
-    // ニュースコレクター（結果2）
-    const newsResult = results[2];
+    // ニュースコレクター（結果1）
+    const newsResult = results[1];
     if (newsResult.status === 'fulfilled') {
       const newsItems = newsResult.value as News[];
       const newsTrends = newsItems.map(news => this.convertNewsToTrend(news));
@@ -78,8 +67,8 @@ export class TrendService {
       logger.error('News collector failed:', newsResult.reason);
     }
 
-    // カレンダーコレクター（結果3）
-    const calendarResult = results[3];
+    // カレンダーコレクター（結果2）
+    const calendarResult = results[2];
     if (calendarResult.status === 'fulfilled') {
       const events = calendarResult.value as Event[];
       // 今後7日以内のイベントのみをトレンドに変換
@@ -193,7 +182,7 @@ export class TrendService {
       source: 'news',
       category: news.category,
       score: 0, // スコアは後で計算
-      mentionCount: 100, // ニュース記事は最低100メンションとして扱う
+      mentionCount: 3000, // ニュース記事（特にはてブ）は人気記事なので3000メンションとして扱う
       timestamp: news.publishedAt,
       metadata: {
         hashtags: [],
