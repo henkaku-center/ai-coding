@@ -46,10 +46,10 @@ export class TwitterCollector extends BaseCollector<Trend> {
   async collect(): Promise<Trend[]> {
     this.log('Starting Twitter trend collection...');
 
-    // API キーがない場合はモックデータを返す
+    // API キーがない場合は空配列を返す
     if (!this.bearerToken || !this.apiKey) {
-      this.log('Twitter API credentials not found. Returning mock data.', 'warn');
-      return this.collectMockData();
+      this.log('Twitter API credentials not found. Skipping Twitter data collection.', 'warn');
+      return [];
     }
 
     try {
@@ -57,8 +57,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
       return await this.collectFromTwitterAPI();
     } catch (error) {
       this.log(`Failed to collect from Twitter API: ${error}`, 'error');
-      this.log('Falling back to mock data', 'warn');
-      return this.collectMockData();
+      this.log('Skipping Twitter data (no fallback)', 'warn');
+      return [];
     }
   }
 
@@ -201,83 +201,6 @@ export class TwitterCollector extends BaseCollector<Trend> {
     }
 
     return 'other';
-  }
-
-  /**
-   * モックデータを返す（開発・テスト用）
-   */
-  private collectMockData(): Trend[] {
-    this.log('Using mock Twitter data');
-
-    const mockTrends: Trend[] = [
-      {
-        id: uuidv4(),
-        keyword: '#技術トレンド',
-        source: 'twitter',
-        category: 'technology',
-        score: 0, // スコアは後で計算
-        mentionCount: 12000,
-        timestamp: new Date(),
-        metadata: {
-          hashtags: ['#技術トレンド', '#プログラミング', '#AI'],
-          relatedKeywords: ['開発', 'エンジニア', '最新技術'],
-        },
-      },
-      {
-        id: uuidv4(),
-        keyword: '#今日のニュース',
-        source: 'twitter',
-        category: 'other',
-        score: 0,
-        mentionCount: 8000,
-        timestamp: new Date(),
-        metadata: {
-          hashtags: ['#今日のニュース', '#速報'],
-          relatedKeywords: ['最新', 'ニュース', '話題'],
-        },
-      },
-      {
-        id: uuidv4(),
-        keyword: '#週末の過ごし方',
-        source: 'twitter',
-        category: 'lifestyle',
-        score: 0,
-        mentionCount: 4500,
-        timestamp: new Date(),
-        metadata: {
-          hashtags: ['#週末の過ごし方', '#休日', '#おでかけ'],
-          relatedKeywords: ['レジャー', '旅行', 'グルメ'],
-        },
-      },
-      {
-        id: uuidv4(),
-        keyword: '#スポーツニュース',
-        source: 'twitter',
-        category: 'sports',
-        score: 0,
-        mentionCount: 6200,
-        timestamp: new Date(),
-        metadata: {
-          hashtags: ['#スポーツニュース', '#野球', '#サッカー'],
-          relatedKeywords: ['試合結果', '選手', '優勝'],
-        },
-      },
-      {
-        id: uuidv4(),
-        keyword: '#新商品発表',
-        source: 'twitter',
-        category: 'business',
-        score: 0,
-        mentionCount: 5800,
-        timestamp: new Date(),
-        metadata: {
-          hashtags: ['#新商品発表', '#新製品', '#発売'],
-          relatedKeywords: ['企業', 'リリース', 'イノベーション'],
-        },
-      },
-    ];
-
-    return mockTrends;
   }
 
   /**
