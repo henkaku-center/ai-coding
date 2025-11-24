@@ -60,7 +60,7 @@ export class TrendService {
     const newsResult = results[1];
     if (newsResult.status === 'fulfilled') {
       const newsItems = newsResult.value as News[];
-      const newsTrends = newsItems.map(news => this.convertNewsToTrend(news));
+      const newsTrends = newsItems.map((news, index) => this.convertNewsToTrend(news, index));
       allTrends.push(...newsTrends);
       logger.info(`News collector succeeded: ${newsTrends.length} trends`);
     } else {
@@ -174,15 +174,23 @@ export class TrendService {
 
   /**
    * NewsをTrendに変換
+   * @param news ニュース記事
+   * @param index ランキング順位（0始まり）
    */
-  private convertNewsToTrend(news: News): Trend {
+  private convertNewsToTrend(news: News, index: number = 0): Trend {
+    // はてブのランキング順位に応じてメンション数を減衰
+    // 1位: 5000, 10位: 3200, 20位: 2000, 50位: 500
+    const baseMentions = 5000;
+    const decayRate = 90; // 順位ごとの減少量
+    const mentionCount = Math.max(500, baseMentions - (index * decayRate));
+
     return {
       id: uuidv4(),
       keyword: news.title,
       source: 'news',
       category: news.category,
       score: 0, // スコアは後で計算
-      mentionCount: 3000, // ニュース記事（特にはてブ）は人気記事なので3000メンションとして扱う
+      mentionCount,
       timestamp: news.publishedAt,
       metadata: {
         hashtags: [],

@@ -215,8 +215,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
         keyword: '#技術トレンド',
         source: 'twitter',
         category: 'technology',
-        score: 92,
-        mentionCount: 45000,
+        score: 0, // スコアは後で計算
+        mentionCount: 12000,
         timestamp: new Date(),
         metadata: {
           hashtags: ['#技術トレンド', '#プログラミング', '#AI'],
@@ -228,8 +228,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
         keyword: '#今日のニュース',
         source: 'twitter',
         category: 'other',
-        score: 78,
-        mentionCount: 28000,
+        score: 0,
+        mentionCount: 8000,
         timestamp: new Date(),
         metadata: {
           hashtags: ['#今日のニュース', '#速報'],
@@ -241,8 +241,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
         keyword: '#週末の過ごし方',
         source: 'twitter',
         category: 'lifestyle',
-        score: 65,
-        mentionCount: 18500,
+        score: 0,
+        mentionCount: 4500,
         timestamp: new Date(),
         metadata: {
           hashtags: ['#週末の過ごし方', '#休日', '#おでかけ'],
@@ -254,8 +254,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
         keyword: '#スポーツニュース',
         source: 'twitter',
         category: 'sports',
-        score: 71,
-        mentionCount: 22000,
+        score: 0,
+        mentionCount: 6200,
         timestamp: new Date(),
         metadata: {
           hashtags: ['#スポーツニュース', '#野球', '#サッカー'],
@@ -267,8 +267,8 @@ export class TwitterCollector extends BaseCollector<Trend> {
         keyword: '#新商品発表',
         source: 'twitter',
         category: 'business',
-        score: 69,
-        mentionCount: 19500,
+        score: 0,
+        mentionCount: 5800,
         timestamp: new Date(),
         metadata: {
           hashtags: ['#新商品発表', '#新製品', '#発売'],

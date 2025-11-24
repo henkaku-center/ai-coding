@@ -75,19 +75,20 @@ export class BookPromoProposer {
   /**
    * 書籍に関連するトレンドを検索
    */
-  private findRelatedTrends(book: Book, trends: Trend[]): Trend[] {
-    const relatedTrends: Trend[] = [];
+  private findRelatedTrends(book: Book, trends: Trend[]): Array<Trend & { relevanceScore: number }> {
+    const relatedTrends: Array<Trend & { relevanceScore: number }> = [];
 
     for (const trend of trends) {
       const relevanceScore = this.calculateRelevance(book, trend);
 
-      if (relevanceScore > 0) {
-        relatedTrends.push(trend);
+      // 関連度が30以上のトレンドのみ採用（より厳格に）
+      if (relevanceScore >= 30) {
+        relatedTrends.push({ ...trend, relevanceScore });
       }
     }
 
-    // スコア順にソートして上位5件を返す
-    return relatedTrends.sort((a, b) => b.score - a.score).slice(0, 5);
+    // 関連度スコア順にソートして上位5件を返す
+    return relatedTrends.sort((a, b) => b.relevanceScore - a.relevanceScore).slice(0, 5);
   }
 
   /**
@@ -133,20 +134,31 @@ export class BookPromoProposer {
    * 推奨度を判定
    */
   private determineRecommendationLevel(
-    relatedTrends: Trend[]
+    relatedTrends: Array<Trend & { relevanceScore: number }>
   ): 'high' | 'medium' | 'low' {
     if (relatedTrends.length === 0) {
       return 'low';
     }
 
-    // 最高スコアのトレンドを基準に判定
-    const maxScore = Math.max(...relatedTrends.map((t) => t.score));
+    // トップトレンドの関連度とスコアを組み合わせて判定
+    const topTrend = relatedTrends[0];
+    if (!topTrend) {
+      return 'low';
+    }
 
-    if (maxScore >= 80) {
+    const maxRelevance = topTrend.relevanceScore;
+    const maxTrendScore = Math.max(...relatedTrends.map((t) => t.score));
+
+    // 関連度が高く（100以上）、かつトレンドスコアも高い（70以上）場合は高推奨
+    if (maxRelevance >= 100 && maxTrendScore >= 70) {
       return 'high';
-    } else if (maxScore >= 60) {
+    }
+    // 関連度が中程度（60以上）またはトレンドスコアが中程度（50以上）
+    else if (maxRelevance >= 60 || (maxTrendScore >= 50 && maxRelevance >= 40)) {
       return 'medium';
-    } else {
+    }
+    // それ以外は低推奨
+    else {
       return 'low';
     }
   }
@@ -154,7 +166,7 @@ export class BookPromoProposer {
   /**
    * プロモーション推奨期間を算出
    */
-  private calculatePromotionPeriod(relatedTrends: Trend[]): {
+  private calculatePromotionPeriod(relatedTrends: Array<Trend & { relevanceScore: number }>): {
     start: Date;
     end: Date;
   } {
@@ -186,7 +198,7 @@ export class BookPromoProposer {
   /**
    * 推奨理由を生成
    */
-  private generateReason(book: Book, relatedTrends: Trend[]): string {
+  private generateReason(book: Book, relatedTrends: Array<Trend & { relevanceScore: number }>): string {
     if (relatedTrends.length === 0) {
       return '現在、関連するトレンドが見つかりませんでした。';
     }
