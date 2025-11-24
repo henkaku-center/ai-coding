@@ -174,30 +174,30 @@
   - [x] ログ出力
 
 ### 5.2 Twitter/X コレクター
-- [ ] `src/collectors/TwitterCollector.ts` 作成
-  - [ ] `BaseCollector` を継承
-  - [ ] Twitter API 連携またはスクレイピング
-  - [ ] トレンドハッシュタグ取得
-  - [ ] `Trend` モデルへの変換
-  - [ ] エラーハンドリング
+- [x] `src/collectors/TwitterCollector.ts` 作成
+  - [x] `BaseCollector` を継承
+  - [x] Twitter API 連携またはスクレイピング（モックデータ実装）
+  - [x] トレンドハッシュタグ取得
+  - [x] `Trend` モデルへの変換
+  - [x] エラーハンドリング
 
 ### 5.3 ニュースコレクター
-- [ ] `src/collectors/NewsCollector.ts` 作成
-  - [ ] `BaseCollector` を継承
-  - [ ] 複数ニュースソース対応
-  - [ ] Cheerio を使った HTML 解析
-  - [ ] `News` モデルへの変換
-  - [ ] 重複除去
-  - [ ] エラーハンドリング
+- [x] `src/collectors/NewsCollector.ts` 作成
+  - [x] `BaseCollector` を継承
+  - [x] 複数ニュースソース対応
+  - [x] Cheerio を使った HTML 解析
+  - [x] `News` モデルへの変換
+  - [x] 重複除去
+  - [x] エラーハンドリング
 
 ### 5.4 カレンダーコレクター
-- [ ] `src/collectors/CalendarCollector.ts` 作成
-  - [ ] `BaseCollector` を継承
-  - [ ] 記念日データ取得
-  - [ ] `Event` モデルへの変換
-  - [ ] エラーハンドリング
+- [x] `src/collectors/CalendarCollector.ts` 作成
+  - [x] `BaseCollector` を継承
+  - [x] 記念日データ取得
+  - [x] `Event` モデルへの変換
+  - [x] エラーハンドリング
 
-- [ ] `src/collectors/index.ts` 作成（コレクターの再エクスポート）
+- [x] `src/collectors/index.ts` 作成（コレクターの再エクスポート）
 
 ---
 
