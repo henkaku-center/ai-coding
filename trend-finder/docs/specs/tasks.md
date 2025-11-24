@@ -135,31 +135,31 @@
 ## Phase 4: リポジトリ層実装
 
 ### 4.1 基本リポジトリ
-- [ ] `src/repositories/base/BaseRepository.ts` 作成
-  - [ ] 抽象基底クラス定義
-  - [ ] `save` メソッド
-  - [ ] `load` メソッド
-  - [ ] `delete` メソッド
-  - [ ] JSON ファイル操作
+- [x] `src/repositories/base/BaseRepository.ts` 作成
+  - [x] 抽象基底クラス定義
+  - [x] `save` メソッド
+  - [x] `load` メソッド
+  - [x] `delete` メソッド
+  - [x] JSON ファイル操作
 
 ### 4.2 各種リポジトリ
-- [ ] `src/repositories/TrendRepository.ts` 作成
-  - [ ] `BaseRepository` を継承
-  - [ ] `saveByDate` メソッド
-  - [ ] `loadByDate` メソッド
-  - [ ] `loadLatest` メソッド
-- [ ] `src/repositories/NewsRepository.ts` 作成
-  - [ ] `BaseRepository` を継承
-  - [ ] ニュースデータの保存・読み込み
-- [ ] `src/repositories/EventRepository.ts` 作成
-  - [ ] `BaseRepository` を継承
-  - [ ] イベントデータの保存・読み込み
-  - [ ] `findByDate` メソッド
-- [ ] `src/repositories/BookRepository.ts` 作成
-  - [ ] `BaseRepository` を継承
-  - [ ] 書籍登録・取得・削除
-  - [ ] `findByKeyword` メソッド
-- [ ] `src/repositories/index.ts` 作成（リポジトリの再エクスポート）
+- [x] `src/repositories/TrendRepository.ts` 作成
+  - [x] `BaseRepository` を継承
+  - [x] `saveByDate` メソッド
+  - [x] `loadByDate` メソッド
+  - [x] `loadLatest` メソッド
+- [x] `src/repositories/NewsRepository.ts` 作成
+  - [x] `BaseRepository` を継承
+  - [x] ニュースデータの保存・読み込み
+- [x] `src/repositories/EventRepository.ts` 作成
+  - [x] `BaseRepository` を継承
+  - [x] イベントデータの保存・読み込み
+  - [x] `findByDate` メソッド
+- [x] `src/repositories/BookRepository.ts` 作成
+  - [x] `BaseRepository` を継承
+  - [x] 書籍登録・取得・削除
+  - [x] `findByKeyword` メソッド
+- [x] `src/repositories/index.ts` 作成（リポジトリの再エクスポート）
 
 ---
 
