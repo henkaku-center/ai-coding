@@ -166,12 +166,12 @@
 ## Phase 5: コレクター実装
 
 ### 5.1 基底クラス
-- [ ] `src/collectors/base/BaseCollector.ts` 作成
-  - [ ] 抽象基底クラス定義
-  - [ ] `collect` 抽象メソッド
-  - [ ] `collectWithRetry` メソッド
-  - [ ] `delay` メソッド
-  - [ ] ログ出力
+- [x] `src/collectors/base/BaseCollector.ts` 作成
+  - [x] 抽象基底クラス定義
+  - [x] `collect` 抽象メソッド
+  - [x] `collectWithRetry` メソッド
+  - [x] `delay` メソッド
+  - [x] ログ出力
 
 ### 5.2 Twitter/X コレクター
 - [ ] `src/collectors/TwitterCollector.ts` 作成
