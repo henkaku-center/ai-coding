@@ -10,6 +10,7 @@ export interface Book {
   title: string;
   keywords: string[];
   genre: string;
+  amazonUrl: string;
   registeredAt: Date;
 }
 
@@ -31,6 +32,7 @@ export const BookSchema = z.object({
   title: z.string().min(1),
   keywords: z.array(z.string()),
   genre: z.string(),
+  amazonUrl: z.string().url(),
   registeredAt: z.date(),
 });
 

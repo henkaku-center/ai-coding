@@ -103,6 +103,7 @@ export class DailyReporter {
         lines.push('### 🔴 高推奨');
         high.forEach((promo) => {
           lines.push(`#### ${promo.book.title}`);
+          lines.push(`- **Amazon**: ${promo.book.amazonUrl}`);
           lines.push(`- **理由**: ${promo.reason}`);
           lines.push(
             `- **推奨期間**: ${format(promo.recommendedPeriod.start, 'MM/dd')} - ${format(promo.recommendedPeriod.end, 'MM/dd')}`
@@ -115,6 +116,7 @@ export class DailyReporter {
         lines.push('### 🟡 中推奨');
         medium.forEach((promo) => {
           lines.push(`#### ${promo.book.title}`);
+          lines.push(`- **Amazon**: ${promo.book.amazonUrl}`);
           lines.push(`- **理由**: ${promo.reason}`);
           lines.push('');
         });
@@ -123,7 +125,7 @@ export class DailyReporter {
       if (low.length > 0) {
         lines.push('### 🟢 低推奨');
         low.forEach((promo) => {
-          lines.push(`- ${promo.book.title}`);
+          lines.push(`- ${promo.book.title} - [Amazon](${promo.book.amazonUrl})`);
         });
         lines.push('');
       }
@@ -517,7 +519,7 @@ ${data.bookPromotions
       promo.recommendationLevel === 'high' ? '高' : promo.recommendationLevel === 'medium' ? '中' : '低';
     return `
           <tr>
-            <td><strong>${promo.book.title}</strong></td>
+            <td><strong><a href="${promo.book.amazonUrl}" target="_blank" style="color: #667eea; text-decoration: none;">${promo.book.title}</a></strong></td>
             <td><span class="badge ${badgeClass}">${label}</span></td>
             <td>${promo.reason}</td>
             <td>${format(promo.recommendedPeriod.start, 'MM/dd')} - ${format(promo.recommendedPeriod.end, 'MM/dd')}</td>
