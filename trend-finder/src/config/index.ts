@@ -2,6 +2,9 @@
  * 設定ファイル
  */
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { Config } from '../types/config.js';
 
 export const config: Config = {

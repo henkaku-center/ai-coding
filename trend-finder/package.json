@@ -45,6 +45,7 @@
     "cheerio": "^1.1.2",
     "commander": "^14.0.2",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.3",
     "node-cron": "^4.2.1",
     "uuid": "^13.0.0",
     "winston": "^3.18.3",
