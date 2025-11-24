@@ -204,32 +204,32 @@
 ## Phase 6: アナライザー実装
 
 ### 6.1 トレンドスコアアナライザー
-- [ ] `src/analyzers/TrendScoreAnalyzer.ts` 作成
-  - [ ] `calculateScore` メソッド実装
-  - [ ] `calculateMentionScore` メソッド
-  - [ ] `calculateVelocityScore` メソッド
-  - [ ] `calculateFreshnessScore` メソッド
-  - [ ] スコア算出式の実装
-  - [ ] スコアの正規化
+- [x] `src/analyzers/TrendScoreAnalyzer.ts` 作成
+  - [x] `calculateScore` メソッド実装
+  - [x] `calculateMentionScore` メソッド
+  - [x] `calculateVelocityScore` メソッド
+  - [x] `calculateFreshnessScore` メソッド
+  - [x] スコア算出式の実装
+  - [x] スコアの正規化
 
 ### 6.2 時系列アナライザー
-- [ ] `src/analyzers/TimeSeriesAnalyzer.ts` 作成
-  - [ ] `analyze` メソッド実装
-  - [ ] トレンド開始時刻の検出
-  - [ ] ピーク時刻の検出
-  - [ ] 継続時間の計算
-  - [ ] 衰退速度の計算
-  - [ ] 急上昇判定（`isRising` メソッド）
+- [x] `src/analyzers/TimeSeriesAnalyzer.ts` 作成
+  - [x] `analyze` メソッド実装
+  - [x] トレンド開始時刻の検出
+  - [x] ピーク時刻の検出
+  - [x] 継続時間の計算
+  - [x] 衰退速度の計算
+  - [x] 急上昇判定（`isRising` メソッド）
 
 ### 6.3 関連性アナライザー
-- [ ] `src/analyzers/RelationAnalyzer.ts` 作成
-  - [ ] `findRelations` メソッド実装
-  - [ ] 共起キーワード抽出
-  - [ ] Jaccard 係数計算
-  - [ ] 関連スコア算出
-  - [ ] 関連ハッシュタグ抽出
+- [x] `src/analyzers/RelationAnalyzer.ts` 作成
+  - [x] `findRelations` メソッド実装
+  - [x] 共起キーワード抽出
+  - [x] Jaccard 係数計算
+  - [x] 関連スコア算出
+  - [x] 関連ハッシュタグ抽出
 
-- [ ] `src/analyzers/index.ts` 作成（アナライザーの再エクスポート）
+- [x] `src/analyzers/index.ts` 作成（アナライザーの再エクスポート）
 
 ---
 
