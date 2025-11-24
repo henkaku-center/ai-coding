@@ -106,29 +106,29 @@
 ## Phase 3: データモデル実装
 
 ### 3.1 基本モデル
-- [ ] `src/models/Trend.ts` 作成
-  - [ ] `Trend` インターフェース定義
-  - [ ] Zod スキーマ定義
-  - [ ] バリデーション関数
-- [ ] `src/models/News.ts` 作成
-  - [ ] `News` インターフェース定義
-  - [ ] Zod スキーマ定義
-- [ ] `src/models/Event.ts` 作成
-  - [ ] `Event` インターフェース定義
-  - [ ] Zod スキーマ定義
-- [ ] `src/models/TrendHistory.ts` 作成
-  - [ ] `TrendHistory` インターフェース定義
-  - [ ] Zod スキーマ定義
+- [x] `src/models/Trend.ts` 作成
+  - [x] `Trend` インターフェース定義
+  - [x] Zod スキーマ定義
+  - [x] バリデーション関数
+- [x] `src/models/News.ts` 作成
+  - [x] `News` インターフェース定義
+  - [x] Zod スキーマ定義
+- [x] `src/models/Event.ts` 作成
+  - [x] `Event` インターフェース定義
+  - [x] Zod スキーマ定義
+- [x] `src/models/TrendHistory.ts` 作成
+  - [x] `TrendHistory` インターフェース定義
+  - [x] Zod スキーマ定義
 
 ### 3.2 提案モデル
-- [ ] `src/models/ArticleProposal.ts` 作成
-  - [ ] `ArticleProposal` インターフェース定義
-  - [ ] Zod スキーマ定義
-- [ ] `src/models/BookPromotion.ts` 作成
-  - [ ] `Book` インターフェース定義
-  - [ ] `BookPromotion` インターフェース定義
-  - [ ] Zod スキーマ定義
-- [ ] `src/models/index.ts` 作成（モデルの再エクスポート）
+- [x] `src/models/ArticleProposal.ts` 作成
+  - [x] `ArticleProposal` インターフェース定義
+  - [x] Zod スキーマ定義
+- [x] `src/models/BookPromotion.ts` 作成
+  - [x] `Book` インターフェース定義
+  - [x] `BookPromotion` インターフェース定義
+  - [x] Zod スキーマ定義
+- [x] `src/models/index.ts` 作成（モデルの再エクスポート）
 
 ---
 
