@@ -14,7 +14,9 @@
       "Bash(find:*)",
       "Bash(test:*)",
       "Bash(cat:*)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "WebSearch",
+      "Bash(npm start report)"
     ],
     "deny": [],
     "ask": []
