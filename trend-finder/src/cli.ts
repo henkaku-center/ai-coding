@@ -79,31 +79,43 @@ program
 // report コマンド
 program
   .command('report')
-  .description('日次レポートを生成')
+  .description('日次レポートを生成（Markdown + HTMLダッシュボード）')
   .option('--output <dir>', '出力ディレクトリ', './data/reports/daily')
   .action(async (options) => {
     try {
       logger.info('Generating daily report...');
 
-      const report = await trendService.generateDailyReport();
+      // Markdownレポート生成
+      const markdownReport = await trendService.generateDailyReport();
+
+      // HTMLダッシュボード生成
+      const htmlReport = await trendService.generateDailyReportHTML();
 
       // 出力ディレクトリを作成
       await fs.mkdir(options.output, { recursive: true });
 
       // ファイルに保存
       const today = new Date().toISOString().split('T')[0];
-      const filename = `${today}.md`;
-      const filepath = path.join(options.output, filename);
+      const mdFilename = `${today}.md`;
+      const htmlFilename = `${today}.html`;
+      const mdFilepath = path.join(options.output, mdFilename);
+      const htmlFilepath = path.join(options.output, htmlFilename);
 
-      await fs.writeFile(filepath, report, 'utf-8');
+      await fs.writeFile(mdFilepath, markdownReport, 'utf-8');
+      await fs.writeFile(htmlFilepath, htmlReport, 'utf-8');
 
       console.log(`\n✅ 日次レポートを生成しました`);
-      console.log(`📄 ファイル: ${filepath}\n`);
+      console.log(`📄 Markdown: ${mdFilepath}`);
+      console.log(`🌐 HTMLダッシュボード: ${htmlFilepath}\n`);
 
-      // レポートの一部を表示
-      const lines = report.split('\n');
+      // Markdownレポートの一部を表示
+      const lines = markdownReport.split('\n');
       console.log(lines.slice(0, 20).join('\n'));
       console.log('\n...\n');
+
+      // HTMLダッシュボードをブラウザで開く案内
+      console.log('💡 HTMLダッシュボードを開くには:');
+      console.log(`   open ${htmlFilepath}\n`);
     } catch (error) {
       logger.error('Failed to generate report', error);
       console.error('❌ エラーが発生しました:', error);

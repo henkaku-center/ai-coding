@@ -80,11 +80,27 @@ export class TrendService {
   }
 
   /**
-   * 日次レポートを生成
+   * 日次レポートを生成（Markdown形式）
    */
   async generateDailyReport(date: Date = new Date()): Promise<string> {
     logger.info('Generating daily report...');
+    const reportData = await this.generateReportData(date);
+    return this.dailyReporter.generateMarkdown(reportData);
+  }
 
+  /**
+   * 日次レポートを生成（HTML形式）
+   */
+  async generateDailyReportHTML(date: Date = new Date()): Promise<string> {
+    logger.info('Generating daily report HTML...');
+    const reportData = await this.generateReportData(date);
+    return this.dailyReporter.generateHTML(reportData);
+  }
+
+  /**
+   * レポートデータを生成（共通処理）
+   */
+  private async generateReportData(date: Date): Promise<DailyReportData> {
     // トレンド収集
     const trends = await this.collectAllTrends();
 
@@ -105,16 +121,13 @@ export class TrendService {
     const bookPromotions = await this.bookPromoProposer.proposeForBooks(books, analyzedTrends);
 
     // レポートデータ作成
-    const reportData: DailyReportData = {
+    return {
       date,
       topTrends: analyzedTrends.slice(0, 10),
       risingTrends,
       articleProposals,
       bookPromotions,
     };
-
-    // Markdownレポート生成
-    return this.dailyReporter.generateMarkdown(reportData);
   }
 
   /**
