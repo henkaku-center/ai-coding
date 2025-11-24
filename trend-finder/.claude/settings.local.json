@@ -11,7 +11,10 @@
       "Bash(npm run build:*)",
       "Bash(node dist/index.js:*)",
       "Bash(git restore:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(test:*)",
+      "Bash(cat:*)",
+      "Bash(open:*)"
     ],
     "deny": [],
     "ask": []
