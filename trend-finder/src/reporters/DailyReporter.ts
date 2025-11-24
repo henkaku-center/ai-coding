@@ -560,6 +560,21 @@ ${data.bookPromotions
           }
         },
         scales: {
+          x: {
+            ticks: {
+              maxRotation: 45,
+              minRotation: 45,
+              autoSkip: false,
+              callback: function(value, index) {
+                const label = this.getLabelForValue(value);
+                // ラベルが30文字以上の場合は短縮
+                if (label.length > 30) {
+                  return label.substring(0, 27) + '...';
+                }
+                return label;
+              }
+            }
+          },
           y: {
             beginAtZero: true,
             max: 100
