@@ -262,15 +262,15 @@
 ## Phase 8: レポーター実装
 
 ### 8.1 日次レポーター
-- [ ] `src/reporters/DailyReporter.ts` 作成
-  - [ ] `generate` メソッド実装
-  - [ ] トップトレンドセクション生成
-  - [ ] 急上昇ワードセクション生成
-  - [ ] 記事提案セクション生成
-  - [ ] 書籍プロモセクション生成
-  - [ ] Markdown フォーマット出力
-  - [ ] JSON フォーマット出力
-  - [ ] ファイル保存
+- [x] `src/reporters/DailyReporter.ts` 作成
+  - [x] `generate` メソッド実装
+  - [x] トップトレンドセクション生成
+  - [x] 急上昇ワードセクション生成
+  - [x] 記事提案セクション生成
+  - [x] 書籍プロモセクション生成
+  - [x] Markdown フォーマット出力
+  - [x] JSON フォーマット出力
+  - [x] ファイル保存
 
 ### 8.2 週次レポーター
 - [ ] `src/reporters/WeeklyReporter.ts` 作成
