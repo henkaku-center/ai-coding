@@ -66,40 +66,40 @@
 ## Phase 2: 基盤実装
 
 ### 2.1 型定義
-- [ ] `src/types/config.ts` 作成
-  - [ ] `Config` インターフェース定義
-  - [ ] `CollectorConfig` インターフェース定義
-  - [ ] `AnalyzerConfig` インターフェース定義
-- [ ] `src/types/collector.ts` 作成
-  - [ ] `CollectorResult` 型定義
-  - [ ] `CollectorPlugin` インターフェース定義
-- [ ] `src/types/index.ts` 作成（型の再エクスポート）
+- [x] `src/types/config.ts` 作成
+  - [x] `Config` インターフェース定義
+  - [x] `CollectorConfig` インターフェース定義
+  - [x] `AnalyzerConfig` インターフェース定義
+- [x] `src/types/collector.ts` 作成
+  - [x] `CollectorResult` 型定義
+  - [x] `CollectorPlugin` インターフェース定義
+- [x] `src/types/index.ts` 作成（型の再エクスポート）
 
 ### 2.2 設定ファイル
-- [ ] `src/config/index.ts` 作成
-  - [ ] デフォルト設定定義
-  - [ ] 環境変数読み込み
-  - [ ] 設定のエクスポート
-- [ ] `src/config/sources.ts` 作成
-  - [ ] データソース設定定義
-- [ ] `src/config/categories.ts` 作成
-  - [ ] カテゴリ定義
-  - [ ] カテゴリ型のエクスポート
+- [x] `src/config/index.ts` 作成
+  - [x] デフォルト設定定義
+  - [x] 環境変数読み込み
+  - [x] 設定のエクスポート
+- [x] `src/config/sources.ts` 作成
+  - [x] データソース設定定義
+- [x] `src/config/categories.ts` 作成
+  - [x] カテゴリ定義
+  - [x] カテゴリ型のエクスポート
 
 ### 2.3 ユーティリティ実装
-- [ ] `src/utils/logger.ts` 作成
-  - [ ] Winston ロガーの初期化
-  - [ ] ログレベル設定
-  - [ ] ファイル出力設定
-- [ ] `src/utils/retry.ts` 作成
-  - [ ] `retryWithBackoff` 関数実装
-  - [ ] 指数バックオフロジック
-- [ ] `src/utils/delay.ts` 作成
-  - [ ] `sleep` 関数実装
-- [ ] `src/utils/deduplicator.ts` 作成
-  - [ ] `removeDuplicates` 関数実装
-  - [ ] キーベースの重複除去
-- [ ] `src/utils/index.ts` 作成（ユーティリティの再エクスポート）
+- [x] `src/utils/logger.ts` 作成
+  - [x] Winston ロガーの初期化
+  - [x] ログレベル設定
+  - [x] ファイル出力設定
+- [x] `src/utils/retry.ts` 作成
+  - [x] `retryWithBackoff` 関数実装
+  - [x] 指数バックオフロジック
+- [x] `src/utils/delay.ts` 作成
+  - [x] `sleep` 関数実装
+- [x] `src/utils/deduplicator.ts` 作成
+  - [x] `removeDuplicates` 関数実装
+  - [x] キーベースの重複除去
+- [x] `src/utils/index.ts` 作成（ユーティリティの再エクスポート）
 
 ---
 
