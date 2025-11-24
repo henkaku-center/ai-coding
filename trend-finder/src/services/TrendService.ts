@@ -3,21 +3,23 @@
  * トレンド収集・分析・提案の統合サービス
  */
 
-import { MockTrendCollector, TwitterCollector } from '../collectors/index.js';
+import { MockTrendCollector, TwitterCollector, NewsCollector, CalendarCollector } from '../collectors/index.js';
 import { TrendScoreAnalyzer } from '../analyzers/index.js';
 import { ArticleProposer } from '../proposers/index.js';
 import { DailyReporter, DailyReportData } from '../reporters/index.js';
 import { TrendRepository, BookRepository } from '../repositories/index.js';
 import { Trend } from '../models/Trend.js';
+import { News } from '../models/News.js';
+import { Event } from '../models/Event.js';
 import { BookPromoProposer } from '../proposers/BookPromoProposer.js';
 import { logger } from '../utils/logger.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export class TrendService {
   private mockCollector = new MockTrendCollector();
   private twitterCollector = new TwitterCollector();
-  // 将来の拡張用
-  // private newsCollector = new NewsCollector();
-  // private calendarCollector = new CalendarCollector();
+  private newsCollector = new NewsCollector();
+  private calendarCollector = new CalendarCollector();
 
   private scoreAnalyzer = new TrendScoreAnalyzer();
   // 将来の拡張用
@@ -41,18 +43,53 @@ export class TrendService {
     const results = await Promise.allSettled([
       this.mockCollector.collectWithRetry(),
       this.twitterCollector.collectWithRetry(),
+      this.newsCollector.collectWithRetry(),
+      this.calendarCollector.collectWithRetry(),
     ]);
 
     const allTrends: Trend[] = [];
 
-    results.forEach((result, index) => {
-      if (result.status === 'fulfilled') {
-        allTrends.push(...result.value);
-        logger.info(`Collector ${index} succeeded: ${result.value.length} trends`);
-      } else {
-        logger.error(`Collector ${index} failed:`, result.reason);
-      }
-    });
+    // モックコレクター（結果0）
+    const mockResult = results[0];
+    if (mockResult.status === 'fulfilled') {
+      allTrends.push(...(mockResult.value as Trend[]));
+      logger.info(`Mock collector succeeded: ${mockResult.value.length} trends`);
+    } else {
+      logger.error('Mock collector failed:', mockResult.reason);
+    }
+
+    // Twitterコレクター（結果1）
+    const twitterResult = results[1];
+    if (twitterResult.status === 'fulfilled') {
+      allTrends.push(...(twitterResult.value as Trend[]));
+      logger.info(`Twitter collector succeeded: ${twitterResult.value.length} trends`);
+    } else {
+      logger.error('Twitter collector failed:', twitterResult.reason);
+    }
+
+    // ニュースコレクター（結果2）
+    const newsResult = results[2];
+    if (newsResult.status === 'fulfilled') {
+      const newsItems = newsResult.value as News[];
+      const newsTrends = newsItems.map(news => this.convertNewsToTrend(news));
+      allTrends.push(...newsTrends);
+      logger.info(`News collector succeeded: ${newsTrends.length} trends`);
+    } else {
+      logger.error('News collector failed:', newsResult.reason);
+    }
+
+    // カレンダーコレクター（結果3）
+    const calendarResult = results[3];
+    if (calendarResult.status === 'fulfilled') {
+      const events = calendarResult.value as Event[];
+      // 今後7日以内のイベントのみをトレンドに変換
+      const upcomingEvents = events.slice(0, 5);
+      const eventTrends = upcomingEvents.map(event => this.convertEventToTrend(event));
+      allTrends.push(...eventTrends);
+      logger.info(`Calendar collector succeeded: ${eventTrends.length} trends`);
+    } else {
+      logger.error('Calendar collector failed:', calendarResult.reason);
+    }
 
     logger.info(`Total trends collected: ${allTrends.length}`);
     return allTrends;
@@ -144,5 +181,44 @@ export class TrendService {
   async loadTrends(date: Date = new Date()): Promise<Trend[]> {
     const trends = await this.trendRepository.loadByDate(date);
     return trends || [];
+  }
+
+  /**
+   * NewsをTrendに変換
+   */
+  private convertNewsToTrend(news: News): Trend {
+    return {
+      id: uuidv4(),
+      keyword: news.title,
+      source: 'news',
+      category: news.category,
+      score: 0, // スコアは後で計算
+      mentionCount: 100, // ニュース記事は最低100メンションとして扱う
+      timestamp: news.publishedAt,
+      metadata: {
+        hashtags: [],
+        relatedKeywords: news.keywords,
+        url: news.sourceUrl,
+      },
+    };
+  }
+
+  /**
+   * EventをTrendに変換
+   */
+  private convertEventToTrend(event: Event): Trend {
+    return {
+      id: uuidv4(),
+      keyword: event.name,
+      source: 'calendar',
+      category: event.category,
+      score: 0, // スコアは後で計算
+      mentionCount: 500, // イベントは話題性が高いため500メンションとして扱う
+      timestamp: new Date(event.date),
+      metadata: {
+        hashtags: [],
+        relatedKeywords: [event.description, event.date],
+      },
+    };
   }
 }
