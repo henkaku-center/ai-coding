@@ -8,6 +8,8 @@ import path from 'path';
 import { TrendService } from './services/index.js';
 import { logger } from './utils/logger.js';
 import { config } from './config/index.js';
+import { BookSuggestionProposer } from './proposers/index.js';
+import { BookRepository, TrendRepository } from './repositories/index.js';
 
 const program = new Command();
 const trendService = new TrendService();
@@ -133,6 +135,65 @@ program
     console.log(`データパス: ${config.storage.path}`);
     console.log(`ログレベル: ${config.logging.level}`);
     console.log(`ログファイル: ${config.logging.file}\n`);
+  });
+
+// suggest-books コマンド
+program
+  .command('suggest-books')
+  .description('トレンドに基づいて講談社の書籍候補を提案')
+  .option('--output <file>', '出力ファイル', './data/book-suggestions.md')
+  .option('--top <number>', '上位N件を表示', '20')
+  .action(async (options) => {
+    try {
+      logger.info('Generating book suggestions...');
+
+      // リポジトリを初期化
+      const trendRepo = new TrendRepository();
+      const bookRepo = new BookRepository();
+
+      // 最新のトレンドデータを読み込む
+      const trends = await trendRepo.loadLatest();
+      if (!trends || trends.length === 0) {
+        console.error('❌ トレンドデータが見つかりません。先に `collect --save` を実行してください。');
+        process.exit(1);
+      }
+
+      // 既存の書籍データを読み込む
+      const existingBooks = (await bookRepo.loadAll()) || [];
+
+      // 書籍推奨リストを生成
+      const proposer = new BookSuggestionProposer();
+      const suggestions = await proposer.propose(trends, existingBooks);
+
+      const topN = parseInt(options.top, 10);
+      const topSuggestions = suggestions.slice(0, topN);
+
+      console.log(`\n✅ ${suggestions.length}件の書籍候補を生成しました`);
+      console.log(`📊 上位${topN}件を表示します\n`);
+
+      // Markdown形式でフォーマット
+      const markdown = proposer.formatSuggestions(topSuggestions);
+
+      // ファイルに保存
+      await fs.writeFile(options.output, markdown, 'utf-8');
+
+      console.log(`💾 書籍推奨リストを保存しました: ${options.output}\n`);
+
+      // コンソールに上位5件を表示
+      console.log('📚 トップ5の書籍候補:');
+      topSuggestions.slice(0, 5).forEach((suggestion, index) => {
+        console.log(`  ${index + 1}. ${suggestion.keyword}`);
+        console.log(`     カテゴリ: ${suggestion.category}, ジャンル: ${suggestion.suggestedGenre}`);
+        console.log(`     メンション: ${suggestion.mentionCount.toLocaleString()}件\n`);
+      });
+
+      console.log(`💡 詳細は以下のファイルを確認してください:`);
+      console.log(`   ${options.output}\n`);
+    } catch (error) {
+      logger.error('Failed to generate book suggestions', error);
+      console.error('❌ エラーが発生しました:', error);
+      process.exit(1);
+    }
   });
 
 export { program };

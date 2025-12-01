@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npm start collect -- --save)",
+      "Bash(npm start report)",
+      "Bash(open:*)",
+      "WebFetch(domain:www.kodansha.co.jp)",
+      "WebFetch(domain:bookclub.kodansha.co.jp)",
+      "WebFetch(domain:gendai.media)",
+      "Bash(mkdir:*)",
+      "WebSearch",
+      "Bash(npm start suggest-books -- --top 10)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
