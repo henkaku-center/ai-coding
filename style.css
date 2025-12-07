@@ -1,0 +1,375 @@
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #1a1a2e;
+    --color-secondary: #16213e;
+    --color-accent: #0f4c75;
+    --color-text: #333;
+    --color-text-light: #666;
+    --color-bg: #fafafa;
+    --color-white: #fff;
+    --color-border: #e0e0e0;
+    --font-main: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    --spacing-unit: 1rem;
+    --max-width: 900px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    line-height: 1.8;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 1.5);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--color-white);
+    padding: calc(var(--spacing-unit) * 6) 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.hero .subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+.hero .tagline {
+    font-size: 1rem;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: calc(var(--spacing-unit) * 1.5);
+    display: inline-block;
+}
+
+/* Section Styles */
+section {
+    padding: calc(var(--spacing-unit) * 4) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+section h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    letter-spacing: 0.1em;
+    position: relative;
+    padding-bottom: calc(var(--spacing-unit) * 0.75);
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-accent);
+}
+
+/* Profile Section */
+.profile-grid {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 0.25);
+}
+
+.profile-item .label {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.profile-item .value {
+    font-size: 1rem;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 700px;
+    padding-left: 100px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item .year {
+    position: absolute;
+    left: -100px;
+    width: 60px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-align: right;
+    padding-top: 2px;
+}
+
+.timeline-item .dot {
+    position: absolute;
+    left: -25px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    margin-top: 6px;
+    z-index: 2;
+}
+
+/* 縦線 - 各ドットから次のアイテムへ */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 18px;
+    width: 2px;
+    height: calc(100% + 16px);
+    background-color: #c0c0c0;
+    z-index: 1;
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-item .content {
+    flex: 1;
+}
+
+.timeline-item .content h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.timeline-item .content p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+/* Roles List */
+.roles-list {
+    list-style: none;
+}
+
+.roles-list li {
+    padding: calc(var(--spacing-unit) * 1) 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 0.25);
+}
+
+.roles-list li:last-child {
+    border-bottom: none;
+}
+
+.roles-list li strong {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.roles-list li span {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+/* Philosophy Section */
+.philosophy-content blockquote {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--color-primary);
+    padding: calc(var(--spacing-unit) * 2);
+    background-color: var(--color-white);
+    border-left: 3px solid var(--color-accent);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.philosophy-content blockquote cite {
+    display: block;
+    margin-top: calc(var(--spacing-unit) * 1);
+    font-size: 0.9rem;
+    font-style: normal;
+    color: var(--color-text-light);
+}
+
+.traits {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.trait h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.trait p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: calc(var(--spacing-unit) * 2) 0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Responsive Design - モバイルファースト */
+
+/* スマートフォン向け（デフォルト） */
+@media (max-width: 599px) {
+    .hero {
+        padding: calc(var(--spacing-unit) * 4) 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hero .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .hero .tagline {
+        font-size: 0.9rem;
+    }
+
+    section h2 {
+        font-size: 1.25rem;
+    }
+
+    /* タイムライン - モバイル用レイアウト */
+    .timeline {
+        padding-left: 32px;
+    }
+
+    .timeline-item .year {
+        position: static;
+        left: auto;
+        width: auto;
+        text-align: left;
+        margin-bottom: calc(var(--spacing-unit) * 0.25);
+        font-size: 0.9rem;
+    }
+
+    .timeline-item .dot {
+        left: -25px;
+        width: 10px;
+        height: 10px;
+        margin-top: 5px;
+    }
+
+    .timeline-item::before {
+        left: -21px;
+    }
+
+    .timeline-item .content h3 {
+        font-size: 1rem;
+    }
+
+    .timeline-item .content p {
+        font-size: 0.9rem;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    /* 引用文 */
+    .philosophy-content blockquote {
+        font-size: 1.1rem;
+        padding: calc(var(--spacing-unit) * 1.5);
+    }
+
+    /* Traits */
+    .trait h3 {
+        font-size: 0.95rem;
+    }
+
+    .trait p {
+        font-size: 0.9rem;
+    }
+}
+
+/* タブレット以上 */
+@media (min-width: 600px) {
+    .hero h1 {
+        font-size: 4rem;
+    }
+
+    .profile-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .traits {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .roles-list li {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: calc(var(--spacing-unit) * 5) 0;
+    }
+}
