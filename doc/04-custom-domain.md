@@ -48,6 +48,14 @@ Cloudflareダッシュボードで次を行います。
 
 迷う場合は、まず `example.com` だけでもOKです（あとで `www` を足せます）。
 
+## 3.5) `wrangler.jsonc` にドメインを書く（AIに頼む）
+
+Custom Domain を使うには、`web/wrangler.jsonc` の `routes` にあなたのドメインを入れておく必要があります。下の文章の `example.com` 部分を自分のドメインに変えて、AIに貼ってください。
+
+```text
+Cloudflare Pages のカスタムドメインを有効にするために、`web/wrangler.jsonc` の `routes` に `example.com` と `www.example.com`（両方なければ片方でも可）を `custom_domain: true` 付きで追加してください。既存の `assets.directory` は `./out` のままにし、他の設定も壊さないようにしてください。
+```
+
 ## 4) Cloudflare Pages にドメインを追加する（管理画面）
 
 Cloudflareダッシュボードで:

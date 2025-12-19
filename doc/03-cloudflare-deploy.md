@@ -16,6 +16,14 @@ flowchart LR
 - GitHubのアカウント（`doc/02` で作ったもの）
 - Cloudflareのアカウント（この章で作る）
 
+## 0) Cloudflare用の設定ファイルをAIに頼む（先に1回だけ）
+
+Cloudflareで公開するには `web/wrangler.jsonc` と `web/package.json` の設定が必要です。まだ整えていない場合は、アカウントを作る前に下の文章をAIに貼って依頼してください。
+
+```text
+Cloudflare Pagesでこのサイトを公開できるように、`web/wrangler.jsonc` と `web/package.json` を設定してください。`npm run build` で `out` が出て、Cloudflareがそれを配信できるようにしてください。足りない設定があれば追加し、ファイルに反映してください。
+```
+
 ## 1) Cloudflareのアカウントを作る
 
 1. Cloudflare にサインアップ（すでにあるならログイン）
