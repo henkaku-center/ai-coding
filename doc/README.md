@@ -1,13 +1,28 @@
 # ホームページを作って公開する（超やさしい手順）
 
-この `doc/` は、「プログラミング未経験でも迷わない」ことを最優先にした手順書です。
-
-やることは大きく4つだけです。
+この `doc/` は、「プログラミング未経験でも迷わない」ことを最優先にした手順書です。やることは4つだけ。
 
 1. AIに文章や見た目の案を出してもらう（vibe-coding）
 2. GitHub に保存する（= 変更履歴も残る）
 3. Cloudflare に GitHub をつなぐ（自動で公開される）
 4. 自分のドメイン（例: `example.com`）で公開する
+
+## まず全体像（順番にやればOK）
+
+- `doc/01-vibe-coding-homepage.md`  
+  - コピペ用の依頼文で AI に作業をお願いする  
+  - 文章は `content/about.md` と `posts/*.md` に置き、Next.js のソースは `web/` に配置するよう指示  
+  - AIが出す経歴などは必ず自分の目で確認（根拠URL付き・丸写しを避ける）
+- `doc/02-github-management.md`  
+  - GitHub は「保存＆巻き戻し」の場所。意味は3つだけ：リポジトリ=フォルダ、コミット=セーブ、プッシュ=アップロード  
+  - おすすめは GitHub Desktop（Add existing repo → `deshi` → Publish → Commit → Push）。ブラウザで記事を増やすだけでもOK
+- `doc/03-cloudflare-deploy.md`  
+  - Cloudflare Pages の管理画面から GitHub を接続するだけで自動公開  
+  - 設定は Root=`web` / Build=`npm run build` / Output=`out` を必ず入力  
+  - 投稿フォルダが空だと失敗するので `posts/welcome.md` は残す
+- `doc/04-custom-domain.md`  
+  - 取得したドメインを Cloudflare に追加し、DNS を Cloudflare 管理にする  
+  - Pages の Custom domains で `example.com`（必要なら `www.example.com` も）を追加してDNS案内に従う
 
 ## このリポジトリの「超ざっくり」
 
@@ -37,13 +52,6 @@
       posts/[slug]/...  # /posts/<slug> (詳細)
 ```
 
-## 目次（上から順にやればOK）
-
-- `doc/01-vibe-coding-homepage.md`：まずは「中身を追加」して完成体を作る
-- `doc/02-github-management.md`：GitHubに保存して、戻せる状態にする
-- `doc/03-cloudflare-deploy.md`：Cloudflare管理画面で自動公開する
-- `doc/04-custom-domain.md`：自分のドメインで公開する
-
 ## 最初に読む場所
 
-`doc/01-vibe-coding-homepage.md` から始めてください。
+迷ったら `doc/01-vibe-coding-homepage.md` から始めてください。
