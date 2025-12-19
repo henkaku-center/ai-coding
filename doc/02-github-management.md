@@ -13,15 +13,18 @@ GitHub は「このフォルダをネットに保存して、いつでも戻せ�
 
 黒い画面は不要。VS Code の左側にある「ソース管理」ビューだけを使います。
 
+### コミット前にAIへ一声（ゴミを入れない）
+
+- 「この `*.log` や `node_modules` は `.gitignore` に入れて」とAIに頼むだけでOK
+- 怪しいファイルがあれば「これコミットしていい？」と聞くと、不要なものを除外してくれる
+- `.gitignore` に追加されたものは変更一覧から消えるので、毎回のコミットがシンプルになる
+
 ### 方法A: VS Code でアップロードする
 
 初回（公開先を作る）
-
-1. VS Code を開き、右上の顔アイコン（Accounts）から GitHub にサインイン
-2. `deshi` フォルダを VS Code で開く
-3. 左の「ソース管理」アイコン（枝分かれマーク）を押す
-4. `Publish to GitHub`（または `Publish Branch`）ボタンを押す
-5. GitHub 上のリポジトリ名はそのままでOK、公開範囲は **Private** 推奨
+1. 左の「ソース管理」アイコン（枝分かれマーク）を押す
+2. `Publish to GitHub`（または `Publish Branch`）ボタンを押す
+3. GitHub 上のリポジトリ名はそのままでOK、公開範囲は **Private** 推奨
 
 変更したら毎回これだけ
 
@@ -32,18 +35,6 @@ GitHub は「このフォルダをネットに保存して、いつでも戻せ�
 5. `Sync Changes`（矢印の↕）か `Push` が出ていれば押す
 
 これで「セーブしてGitHubにアップロード」完了です。
-
-### 方法B: ブラウザだけで編集する（超かんたん）
-
-コードを触らず、記事だけ増やしたいならブラウザでもできます。
-
-1. GitHubのリポジトリを開く
-2. `content/`（トップ）または `posts/`（投稿）を開く
-3. `Add file` → `Create new file`
-4. `content/about.md` や `posts/my-first.md` のようにして本文を貼る
-5. `Commit changes` を押す
-
-この方法でも Cloudflare Pages は自動で更新できます（次章）。
 
 ## こわいときの保険（任意）
 
